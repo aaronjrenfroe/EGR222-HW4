@@ -9,8 +9,10 @@ import java.util.*;
 import java.io.*;
 
 public class Personality {
+    
     // Class constant FOUR because of the 4 sections
     static final int FOUR = 4;
+
     //object that contains file locations
     static final class IOLocations {
         private String inFileName;
@@ -52,6 +54,7 @@ public class Personality {
             }
         }
     }
+
     //object that contains myTest Taker:
     // name, Answers in AB-form, answers in ISTJ form, and Answers in Numerical score form
     static final class KeirseyData {
@@ -108,6 +111,7 @@ public class Personality {
         printResults(myTests, myLocations.outFileName);
 
     }
+
     // Prints the intro to what the program does
     public static void printIntro() {
         System.out.println("This program processes a file of answers to the\n" +
@@ -116,6 +120,7 @@ public class Personality {
                 "a sequence of B-percentages and then into a\n" +
                 "four-letter myTestality type.");
     }
+
     // Request the in and out file from the user returns IOLocation
     public static IOLocations getSearchTerms() {
         Scanner console = new Scanner(System.in);
@@ -126,6 +131,7 @@ public class Personality {
         myLocations.setOutFileName(console.next());
         return myLocations;
     }
+
     // opens file and extracts the test answers, creates and returns KeirseyData[]
     public static KeirseyData[] getFileData(String inFile) {
 
@@ -152,14 +158,14 @@ public class Personality {
         } catch (FileNotFoundException ex) {
             System.out.println("File not found: " + inFile+ " " + ex);
         }
-
+        //if file was empty
         return new KeirseyData[0];
 
     }
+
     //Looks at answers and creates the numberical score
     public static void scoreMyTests(KeirseyData[] myTests) {
         for (KeirseyData test :myTests) {
-
 
             String answers = test.data.toLowerCase();
             int[][] scoreCounts = new int[FOUR][2];
@@ -174,7 +180,6 @@ public class Personality {
                 } else {
                     bit = -1;
                 }
-
                 if (bit >= 0) {
                     //expression
                     int dimension = (((i % 7) + 1) / 2);
@@ -183,11 +188,9 @@ public class Personality {
                 }
             }
             scoreToAlpha(test, scoreCounts);
-
-
-
         }
     }
+
     //Converts the numerical score to an alpha score
     public static void scoreToAlpha(KeirseyData test, int[][] scoreCounts){
         String[][] possibleValues = {{"E", "I"}, {"S", "N"}, {"T", "F"}, {"J", "P"}};
@@ -197,6 +200,7 @@ public class Personality {
             test.setScore(inscribeScore(Math.round(score * 100), possibleValues[i][0], possibleValues[i][1]));
         }
     }
+
     // helper method used to calculate if score is leaning towards 0 or 100
     public static String inscribeScore(double score, String a, String b){
         if (score > 50) {
@@ -208,6 +212,7 @@ public class Personality {
             return "X";
         }
     }
+
     //prints the results to the given file
     public static void printResults(KeirseyData[] myTestTakers, String outFileName) {
         try {
@@ -219,15 +224,12 @@ public class Personality {
                     if (j < FOUR - 1) {
                         writer.print(", ");
                     }
-
                 }
                 writer.println("] = " + myTestTakers[i].getScore());
             }
         }catch (FileNotFoundException ex){
-
-
+            // if the file can not be opend or created
+            System.out.println("file can not be opend or created" + ex);
         }
     }
-
-
 }
