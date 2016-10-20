@@ -8,7 +8,7 @@ Created by Aaron Renfroe 2016
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class Personality {
     // Class constant FOUR because of the 4 sections
     static final int FOUR = 4;
     //object that contains file locations
