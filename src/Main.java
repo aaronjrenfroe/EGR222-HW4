@@ -4,7 +4,7 @@ The Infile should be at least one Keirsey Test result with a Name and 70 answers
 It then scores the test and outputs the results to the Output
 Created by Aaron Renfroe 2016
 */
-import java.lang.invoke.SwitchPoint;
+
 import java.util.*;
 import java.io.*;
 
@@ -50,8 +50,6 @@ public class Main {
             else{
                 return fileName;
             }
-
-
         }
     }
     //object that contains myTest Taker:
